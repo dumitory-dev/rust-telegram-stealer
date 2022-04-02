@@ -3,6 +3,11 @@ name = "rust-telegram-stealer"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+uuid = {version = "0.8", features = ["v4"] }
+winapi = { version = "0.3", features = ["winuser", "wincon"] }
+user32-sys = "0.2.0"
+sysinfo = "0.23.5"
+tar = "0.4.38"
+curl = "0.4.43"
+regex = "1.5"
