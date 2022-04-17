@@ -1,12 +1,18 @@
-use std::{env, ffi::CString, ptr};
+use std::env;
+#[cfg(target_os = "windows")]
+use std::{ffi::CString, ptr};
 use sysinfo::{ProcessExt, ProcessRefreshKind, SystemExt};
+
+#[cfg(target_os = "windows")]
 use user32::MessageBoxA;
 
+#[cfg(target_os = "windows")]
 use winapi::um::{
     wincon::GetConsoleWindow,
     winuser::{ShowWindow, MB_ICONERROR, MB_OK, SW_HIDE},
 };
 
+#[cfg(target_os = "windows")]
 pub fn show_error(message: &str) {
     let caption = CString::new("System Error").unwrap();
     let text = CString::new(message).unwrap();
@@ -20,6 +26,7 @@ pub fn show_error(message: &str) {
     }
 }
 
+#[cfg(target_os = "windows")]
 pub fn hide_console() {
     unsafe {
         let window = GetConsoleWindow();
