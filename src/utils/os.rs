@@ -53,6 +53,7 @@ pub fn get_temp_dir_path() -> Result<String, String> {
     Ok(path)
 }
 
+#[must_use]
 pub fn generate_uuid() -> String {
     uuid::Uuid::new_v4().to_string()
 }
