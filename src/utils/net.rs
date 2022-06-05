@@ -13,12 +13,12 @@ impl CurlPostRequestSender {
         let mut easy_curl = Easy::new();
         easy_curl.url(url.as_str())?;
         easy_curl.post(true)?;
-        return Ok(Self { easy_curl });
+        Ok(Self { easy_curl })
     }
 
-    pub fn add_file(&mut self, path_to_file: &String) -> Result<&mut Self> {
+    pub fn add_file(&mut self, path_to_file: &str) -> Result<&mut Self> {
         let mut file_form = Form::new();
-        file_form.part("file").file(path_to_file.as_str()).add()?;
+        file_form.part("file").file(path_to_file).add()?;
         self.add_form_data(file_form)
     }
 
@@ -62,9 +62,7 @@ pub struct AnonFilesUploader {
 
 impl AnonFilesUploader {
     const URL: &'static str = "https://anonfiles.com/api/upload";
-
     const REGEX_PATTERN: &'static str = r#"("short":")(\S+)("},"metadata")"#;
-    const SHORT_LINK_INDEX: u8 = 2;
 
     pub const fn new(path_to_file: String) -> Self {
         Self { path_to_file }
@@ -77,13 +75,13 @@ impl AnonFilesUploader {
         AnonFilesUploader::get_file_short_link_from_response(&response)
     }
 
-    fn get_file_short_link_from_response(response_data: &Vec<u8>) -> Result<String> {
+    fn get_file_short_link_from_response(response_data: &[u8]) -> Result<String> {
         let str_resp = std::str::from_utf8(response_data)?;
-
         let regex = Regex::new(AnonFilesUploader::REGEX_PATTERN).unwrap();
+        let captures_short_link_index = 2;
 
         if let Some(captures) = regex.captures(str_resp) {
-            if let Some(capture) = captures.get(AnonFilesUploader::SHORT_LINK_INDEX.into()) {
+            if let Some(capture) = captures.get(captures_short_link_index) {
                 return Ok(capture.as_str().to_string());
             }
         }
