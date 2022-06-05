@@ -43,6 +43,6 @@ fn main() {
         "5279761929:AAEnsQN3NyCqW5bJndsBzWOdWbqr4G3J9bQ".to_string(),
         "61275341".to_string(),
     )
-    .send_message("Hello, world!".to_string())
+    .send_message("Hello, world!")
     .unwrap();
 }
