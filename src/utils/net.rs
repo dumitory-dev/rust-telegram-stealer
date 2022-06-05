@@ -22,7 +22,7 @@ impl CurlPostRequestSender {
         self.add_form_data(file_form)
     }
 
-    pub fn add_post_fields(&mut self, post_fields: String) -> Result<&mut Self> {
+    pub fn add_post_fields(&mut self, post_fields: &str) -> Result<&mut Self> {
         self.easy_curl.post_field_size(post_fields.len() as u64)?;
         self.easy_curl.post_fields_copy(post_fields.as_bytes())?;
         Ok(self)
@@ -95,21 +95,22 @@ pub struct TelegramBotSender {
 }
 
 impl TelegramBotSender {
+    #[must_use]
     pub const fn new(token: String, chat_id: String) -> Self {
         Self { token, chat_id }
     }
 
-    pub fn send_message(&self, message: String) -> Result<()> {
+    pub fn send_message(&self, message: &str) -> Result<()> {
         let request_url = format!(r#"https://api.telegram.org/bot{}/sendMessage"#, self.token);
         let request_fileds = self.build_request_fileds(message);
 
         CurlPostRequestSender::new(request_url)?
-            .add_post_fields(request_fileds)?
+            .add_post_fields(request_fileds.as_str())?
             .send_request()?;
         Ok(())
     }
 
-    fn build_request_fileds(&self, message: String) -> String {
+    fn build_request_fileds(&self, message: &str) -> String {
         format!(
             "chat_id={}&text={}&parse_mode=Markdown&disable_web_page_preview=True",
             self.chat_id, message
