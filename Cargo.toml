@@ -5,9 +5,10 @@ edition = "2021"
 
 [dependencies]
 uuid = {version = "0.8", features = ["v4"] }
-winapi = { version = "0.3", features = ["winuser", "wincon"] }
+winapi = { version = "0.3", features = [
+    "winuser", "wincon", "processthreadsapi", "winbase", "winnt"] }
+ntapi = "0.3"
 user32-sys = "0.2.0"
-sysinfo = "0.23.5"
 tar = "0.4.38"
 curl = "0.4.43"
 regex = "1.5"
