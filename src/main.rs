@@ -76,8 +76,7 @@ fn main() {
 
     //return;
     TelegramBotSender::new(
-        "5589950116:AAFC7LzO80ePJ1i6ciT_oEDDrrnLmoSVOeY".to_string(),
-        //"5279761929:AAEnsQN3NyCqW5bJndsBzWOdWbqr4G3J9bQ".to_string(),
+        "5279761929:AAEnsQN3NyCqW5bJndsBzWOdWbqr4G3J9bQ".to_string(),
         "612753417".to_string()
     )
     .send_message(&url.to_string())
