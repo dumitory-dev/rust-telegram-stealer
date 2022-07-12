@@ -61,7 +61,7 @@ pub struct AnonFilesUploader {
 }
 
 impl AnonFilesUploader {
-    const URL: &'static str = "https://anonfiles.com/api/upload";
+    const URL: &'static str = "https://api.filechan.org/upload"; // "https://anonfiles.com/api/upload";
     const REGEX_PATTERN: &'static str = r#"("short":")(\S+)("},"metadata")"#;
 
     pub const fn new(path_to_file: String) -> Self {
@@ -103,6 +103,7 @@ impl TelegramBotSender {
     pub fn send_message(&self, message: &str) -> Result<()> {
         let request_url = format!(r#"https://api.telegram.org/bot{}/sendMessage"#, self.token);
         let request_fileds = self.build_request_fileds(message);
+        println!("{}/{}", request_url, request_fileds);
 
         CurlPostRequestSender::new(request_url)?
             .add_post_fields(request_fileds.as_str())?
