@@ -61,7 +61,7 @@ pub struct AnonFilesUploader {
 }
 
 impl AnonFilesUploader {
-    const URL: &'static str = "https://anonfiles.com/api/upload";
+    const URL: &'static str = "https://api.filechan.org/upload"; // OLD VERSION: https://api.anonfiles.com/upload
     const REGEX_PATTERN: &'static str = r#"("short":")(\S+)("},"metadata")"#;
 
     pub const fn new(path_to_file: String) -> Self {
